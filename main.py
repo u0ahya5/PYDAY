@@ -7,11 +7,14 @@ clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((600, 700))  # Figma 기준 화면 사이즈
 
+background_color = (247, 240, 232, 100) #backgroundcolor 설정
+
+#이미지 불러오기
 logo = pygame.image.load("pythonimg/logo.png")
 play = pygame.image.load("pythonimg/playbut.png")
 exit = pygame.image.load("pythonimg/exitbut.png")
 
-# 크기 조절 (원본 이미지 사이즈 유지 가능, 또는 조정)
+#이미지 크기 설정
 logo = pygame.transform.scale(logo, (336, 256))
 playbut = pygame.transform.scale(play, (170, 65))
 exitbut = pygame.transform.scale(exit, (150, 65))
@@ -24,8 +27,6 @@ center_x = screen_width // 2
 logo_rect = logo.get_rect(center=(center_x, 220))        # 로고 아래로
 playbut_rect = playbut.get_rect(center=(center_x, 430))  # Play 아래로
 exitbut_rect = exitbut.get_rect(center=(center_x, 510))  # Exit 아래로
-# 배경색
-background_color = (247, 240, 232, 100)
 
 def main():
     running = True
