@@ -1,55 +1,51 @@
 import pygame
-import sys #인터프리터와 관련된 기능을 제공하는 모듈
+import sys
+from screens.gamelist import show_game_select_screen
 
 pygame.init()
 pygame.display.set_caption("PYDAY")
 clock = pygame.time.Clock()
+screen = pygame.display.set_mode((600, 700))
 
-screen = pygame.display.set_mode((600, 700))  # Figma 기준 화면 사이즈
+# 색상
+background_color = (247, 240, 232)
 
-background_color = (247, 240, 232, 100) #backgroundcolor 설정
-
-#이미지 불러오기
+# 이미지 불러오기
 logo = pygame.image.load("pythonimg/logo.png")
-play = pygame.image.load("pythonimg/playbut.png")
-exit = pygame.image.load("pythonimg/exitbut.png")
+play_img = pygame.image.load("pythonimg/playbut.png")
+exit_img = pygame.image.load("pythonimg/exitbut.png")
 
-#이미지 크기 설정
+# 크기 조절
 logo = pygame.transform.scale(logo, (336, 256))
-playbut = pygame.transform.scale(play, (170, 65))
-exitbut = pygame.transform.scale(exit, (150, 65))
+play_button = pygame.transform.scale(play_img, (170, 65))
+exit_button = pygame.transform.scale(exit_img, (150, 65))
 
-# 중앙 기준 위치 계산
-screen_width = 600
-center_x = screen_width // 2
-
-# 위치 설정 (센터 기준, 더 아래로 이동)
-logo_rect = logo.get_rect(center=(center_x, 220))        # 로고 아래로
-playbut_rect = playbut.get_rect(center=(center_x, 430))  # Play 아래로
-exitbut_rect = exitbut.get_rect(center=(center_x, 510))  # Exit 아래로
+# 위치 설정
+center_x = screen.get_width() // 2
+logo_rect = logo.get_rect(center=(center_x, 220))
+play_rect = play_button.get_rect(center=(center_x, 430))
+exit_rect = exit_button.get_rect(center=(center_x, 510))
 
 def main():
     running = True
     while running:
         screen.fill(background_color)
 
-        screen.blit(logo, logo_rect) #로고출력
+        screen.blit(logo, logo_rect)
+        screen.blit(play_button, play_rect)
+        screen.blit(exit_button, exit_rect)
 
-        # 이미지 그리기
-        screen.blit(playbut, playbut_rect)
-        screen.blit(exitbut, exitbut_rect)
+        pygame.display.flip()
+        clock.tick(60)
 
-        pygame.display.flip() #화면에 그린 내용을 반영함
-        clock.tick(60) #1초 최대 60프레임
-
-        for event in pygame.event.get(): #pygame의 이벤트는 여기서 실행, 움직임 감지
+        for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if play_rect.collidepoint(event.pos):
-                    print("다음 화면으로 이동합니다.")
-                    # 예시: 여기서 새로운 함수 호출 또는 상태 전환 가능
+                    show_game_select_screen(screen)
+                    running = False
                 elif exit_rect.collidepoint(event.pos):
                     running = False
 
