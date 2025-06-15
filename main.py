@@ -5,22 +5,18 @@ from screens.gamelist import show_game_select_screen
 pygame.init()
 pygame.display.set_caption("PYDAY")
 clock = pygame.time.Clock()
-screen = pygame.display.set_mode((600, 700))
+screen = pygame.display.set_mode((500, 600))
 
-# 색상
 background_color = (247, 240, 232)
 
-# 이미지 불러오기
 logo = pygame.image.load("pythonimg/logo.png")
 play_img = pygame.image.load("pythonimg/playbut.png")
 exit_img = pygame.image.load("pythonimg/exitbut.png")
 
-# 크기 조절
 logo = pygame.transform.scale(logo, (336, 256))
 play_button = pygame.transform.scale(play_img, (170, 65))
 exit_button = pygame.transform.scale(exit_img, (150, 65))
 
-# 위치 설정
 center_x = screen.get_width() // 2
 logo_rect = logo.get_rect(center=(center_x, 220))
 play_rect = play_button.get_rect(center=(center_x, 430))
